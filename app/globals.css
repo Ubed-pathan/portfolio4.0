@@ -51,6 +51,14 @@ header {
     height: -webkit-fill-available;
     overflow-x: hidden;
   }
+  
+  /* Disable all animations and transforms on mobile for performance */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Custom Scrollbar */
@@ -103,7 +111,7 @@ header {
   }
 }
 
-/* Gradient text - remove duplicate */
+/* Gradient text - cleaned up duplicates */
 .gradient-text {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
@@ -111,27 +119,6 @@ header {
   background-clip: text;
 }
 
-.dark .gradient-text {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.dark .gradient-text {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 .dark .gradient-text {
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   -webkit-background-clip: text;

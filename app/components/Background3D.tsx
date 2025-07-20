@@ -23,7 +23,7 @@ export default function Background3D() {
   }, [])
 
   useEffect(() => {
-    // Skip 3D rendering on mobile
+    // Skip ALL 3D rendering and complex backgrounds on mobile
     if (isMobile || !mountRef.current) return
 
     // Scene setup
@@ -199,255 +199,253 @@ export default function Background3D() {
 
   return (
     <>
-      {/* Animated background gradients */}
-      <div 
-        ref={backgroundRef}
-        className="fixed inset-0 -z-20 transition-all duration-1000 ease-in-out"
-        style={{
-          background: theme === 'dark' 
-            ? `
-              radial-gradient(circle at 20% 80%, rgba(45, 45, 45, 0.4) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(64, 64, 64, 0.3) 0%, transparent 50%),
-              linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%)
-            `
-            : `
-              radial-gradient(circle at 20% 80%, rgba(220, 215, 195, 0.8) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(200, 195, 175, 0.7) 0%, transparent 50%),
-              linear-gradient(135deg, #ffffff 0%, #faf7f2 50%, #f5f5dc 100%)
-            `
-        }}
-      />
-
-      {/* Animated mesh background */}
-      <div className="fixed inset-0 -z-19 overflow-hidden">
-        <svg
-          className={`absolute inset-0 w-full h-full ${theme === 'dark' ? 'opacity-5' : 'opacity-15'}`}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path
-                d="M 50 0 L 0 0 0 50"
-                fill="none"
-                stroke={theme === 'dark' ? '#666666' : '#888888'}
-                strokeWidth={theme === 'dark' ? '1' : '1.5'}
-                className="animate-pulse"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      {/* Floating geometric shapes */}
-      <div className="fixed inset-0 -z-18 overflow-hidden">
-        {/* Animated triangles */}
-        <div 
-          className={`absolute w-0 h-0 animate-spin
-            ${theme === 'dark' 
-              ? 'opacity-5 border-l-gray-400 border-r-transparent border-b-gray-400' 
-              : 'opacity-25 border-l-gray-600 border-r-transparent border-b-gray-600'
-            }
-          `}
-          style={{
-            borderLeftWidth: '30px',
-            borderRightWidth: '30px',
-            borderBottomWidth: '52px',
-            top: '15%',
-            left: '80%',
-            animationDuration: '30s',
-            animationDirection: 'reverse'
-          }}
-        />
-        <div 
-          className={`absolute w-0 h-0 animate-spin
-            ${theme === 'dark' 
-              ? 'opacity-4 border-l-gray-500 border-r-transparent border-b-gray-500' 
-              : 'opacity-20 border-l-gray-700 border-r-transparent border-b-gray-700'
-            }
-          `}
-          style={{
-            borderLeftWidth: '20px',
-            borderRightWidth: '20px',
-            borderBottomWidth: '35px',
-            top: '70%',
-            left: '10%',
-            animationDuration: '25s'
-          }}
-        />
-
-        {/* Animated circles with pulse */}
-        <div 
-          className={`absolute w-24 h-24 rounded-full animate-pulse
-            ${theme === 'dark' 
-              ? 'opacity-8 bg-gray-600' 
-              : 'opacity-30 bg-gray-500'
-            }
-          `}
-          style={{
-            top: '25%',
-            right: '15%',
-            animationDuration: '4s'
-          }}
-        />
-        <div 
-          className={`absolute w-16 h-16 rounded-full animate-ping
-            ${theme === 'dark' 
-              ? 'opacity-6 bg-gray-700' 
-              : 'opacity-25 bg-gray-600'
-            }
-          `}
-          style={{
-            bottom: '30%',
-            right: '30%',
-            animationDuration: '6s'
-          }}
-        />
-      </div>
-      
-      {/* Floating orbs with enhanced animation */}
-      <div className="fixed inset-0 -z-17 overflow-hidden">
-        <div 
-          className={`absolute w-96 h-96 rounded-full blur-3xl
-            ${theme === 'dark' 
-              ? 'opacity-12 bg-gray-400' 
-              : 'opacity-35 bg-gray-400'
-            }
-          `}
-          style={{
-            top: '10%',
-            left: '10%',
-            animation: 'float 20s ease-in-out infinite, drift 25s ease-in-out infinite alternate'
-          }}
-        />
-        <div 
-          className={`absolute w-80 h-80 rounded-full blur-3xl
-            ${theme === 'dark' 
-              ? 'opacity-10 bg-gray-500' 
-              : 'opacity-30 bg-gray-500'
-            }
-          `}
-          style={{
-            top: '60%',
-            right: '20%',
-            animation: 'float 25s ease-in-out infinite reverse, drift 30s ease-in-out infinite'
-          }}
-        />
-        <div 
-          className={`absolute w-72 h-72 rounded-full blur-3xl
-            ${theme === 'dark' 
-              ? 'opacity-8 bg-gray-600' 
-              : 'opacity-25 bg-gray-600'
-            }
-          `}
-          style={{
-            bottom: '20%',
-            left: '30%',
-            animation: 'float 18s ease-in-out infinite, drift 22s ease-in-out infinite alternate-reverse'
-          }}
-        />
-      </div>
-
-      {/* Flowing lines animation */}
-      <div className="fixed inset-0 -z-16 overflow-hidden">
-        <svg className={`absolute inset-0 w-full h-full ${theme === 'dark' ? 'opacity-4' : 'opacity-20'}`}>
-          <path
-            d="M0,100 Q150,50 300,100 T600,100"
-            fill="none"
-            stroke={theme === 'dark' ? '#555555' : '#777777'}
-            strokeWidth={theme === 'dark' ? '2' : '3'}
-            className="animate-pulse"
-            style={{ animationDuration: '8s' }}
-          />
-          <path
-            d="M100,200 Q250,150 400,200 T700,200"
-            fill="none"
-            stroke={theme === 'dark' ? '#555555' : '#777777'}
-            strokeWidth={theme === 'dark' ? '1.5' : '2.5'}
-            className="animate-pulse"
-            style={{ animationDuration: '10s', animationDelay: '2s' }}
-          />
-          <path
-            d="M50,300 Q200,250 350,300 T650,300"
-            fill="none"
-            stroke={theme === 'dark' ? '#555555' : '#777777'}
-            strokeWidth={theme === 'dark' ? '1' : '2'}
-            className="animate-pulse"
-            style={{ animationDuration: '12s', animationDelay: '4s' }}
-          />
-        </svg>
-      </div>
-
-      {/* Enhanced gradient overlay with rotation */}
-      <div 
-        className={`fixed inset-0 -z-15 transition-all duration-2000 ease-in-out
-          ${theme === 'dark' ? 'opacity-20' : 'opacity-35'}
-        `}
-        style={{
-          background: theme === 'dark'
-            ? `
-              conic-gradient(from 0deg at 50% 50%, 
-                rgba(128, 128, 128, 0.15) 0deg,
-                rgba(64, 64, 64, 0.08) 90deg,
-                rgba(105, 105, 105, 0.12) 180deg,
-                rgba(48, 48, 48, 0.05) 270deg,
-                rgba(128, 128, 128, 0.15) 360deg
-              )
-            `
-            : `
-              conic-gradient(from 0deg at 50% 50%, 
-                rgba(180, 180, 180, 0.35) 0deg,
-                rgba(160, 160, 160, 0.25) 90deg,
-                rgba(200, 200, 200, 0.30) 180deg,
-                rgba(140, 140, 140, 0.20) 270deg,
-                rgba(180, 180, 180, 0.35) 360deg
-              )
-            `,
-          animation: 'spin 60s linear infinite'
-        }}
-      />
-
-      {/* Particle dots animation */}
-      <div className="fixed inset-0 -z-14 overflow-hidden">
-        {Array.from({ length: 15 }, (_, i) => (
-          <div
-            key={i}
-            className={`absolute w-2 h-2 rounded-full animate-bounce
-              ${theme === 'dark' 
-                ? 'opacity-20 bg-gray-400' 
-                : 'opacity-40 bg-gray-600'
-              }
-            `}
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Simplified mobile background */}
-      {isMobile && (
+      {/* Simple static background for mobile - NO animations */}
+      {isMobile ? (
         <div className="fixed inset-0 -z-10">
           <div 
-            className={`absolute inset-0 transition-all duration-1000 ${
+            className={`absolute inset-0 ${
               theme === 'dark' 
-                ? 'bg-gradient-to-br from-gray-900 via-black to-gray-800'
-                : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+                ? 'bg-gradient-to-br from-gray-900 to-black'
+                : 'bg-gradient-to-br from-gray-50 to-white'
             }`}
           />
-          <div className={`absolute inset-0 opacity-30 ${
-            theme === 'dark' ? 'bg-gray-800/20' : 'bg-gray-200/40'
-          }`}>
-            <div className="w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(128,128,128,0.1)_0%,transparent_50%)]" />
-          </div>
         </div>
-      )}
+      ) : (
+        <>
+          {/* Desktop animated backgrounds */}
+          {/* Animated background gradients */}
+          <div 
+            ref={backgroundRef}
+            className="fixed inset-0 -z-20 transition-all duration-1000 ease-in-out"
+            style={{
+              background: theme === 'dark' 
+                ? `
+                  radial-gradient(circle at 20% 80%, rgba(45, 45, 45, 0.4) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(64, 64, 64, 0.3) 0%, transparent 50%),
+                  linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%)
+                `
+                : `
+                  radial-gradient(circle at 20% 80%, rgba(220, 215, 195, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(200, 195, 175, 0.7) 0%, transparent 50%),
+                  linear-gradient(135deg, #ffffff 0%, #faf7f2 50%, #f5f5dc 100%)
+                `
+            }}
+          />
 
-      {/* 3D Canvas - Desktop only */}
-      {!isMobile && <div ref={mountRef} className="fixed inset-0 -z-10" />}
+          {/* Animated mesh background */}
+          <div className="fixed inset-0 -z-19 overflow-hidden">
+            <svg
+              className={`absolute inset-0 w-full h-full ${theme === 'dark' ? 'opacity-5' : 'opacity-15'}`}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <path
+                    d="M 50 0 L 0 0 0 50"
+                    fill="none"
+                    stroke={theme === 'dark' ? '#666666' : '#888888'}
+                    strokeWidth={theme === 'dark' ? '1' : '1.5'}
+                    className="animate-pulse"
+                  />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+          </div>
+
+          {/* Floating geometric shapes */}
+          <div className="fixed inset-0 -z-18 overflow-hidden">
+            {/* Animated triangles */}
+            <div 
+              className={`absolute w-0 h-0 animate-spin
+                ${theme === 'dark' 
+                  ? 'opacity-5 border-l-gray-400 border-r-transparent border-b-gray-400' 
+                  : 'opacity-25 border-l-gray-600 border-r-transparent border-b-gray-600'
+                }
+              `}
+              style={{
+                borderLeftWidth: '30px',
+                borderRightWidth: '30px',
+                borderBottomWidth: '52px',
+                top: '15%',
+                left: '80%',
+                animationDuration: '30s',
+                animationDirection: 'reverse'
+              }}
+            />
+            <div 
+              className={`absolute w-0 h-0 animate-spin
+                ${theme === 'dark' 
+                  ? 'opacity-4 border-l-gray-500 border-r-transparent border-b-gray-500' 
+                  : 'opacity-20 border-l-gray-700 border-r-transparent border-b-gray-700'
+                }
+              `}
+              style={{
+                borderLeftWidth: '20px',
+                borderRightWidth: '20px',
+                borderBottomWidth: '35px',
+                top: '70%',
+                left: '10%',
+                animationDuration: '25s'
+              }}
+            />
+
+            {/* Animated circles with pulse */}
+            <div 
+              className={`absolute w-24 h-24 rounded-full animate-pulse
+                ${theme === 'dark' 
+                  ? 'opacity-8 bg-gray-600' 
+                  : 'opacity-30 bg-gray-500'
+                }
+              `}
+              style={{
+                top: '25%',
+                right: '15%',
+                animationDuration: '4s'
+              }}
+            />
+            <div 
+              className={`absolute w-16 h-16 rounded-full animate-ping
+                ${theme === 'dark' 
+                  ? 'opacity-6 bg-gray-700' 
+                  : 'opacity-25 bg-gray-600'
+                }
+              `}
+              style={{
+                bottom: '30%',
+                right: '30%',
+                animationDuration: '6s'
+              }}
+            />
+          </div>
+          
+          {/* Floating orbs with enhanced animation */}
+          <div className="fixed inset-0 -z-17 overflow-hidden">
+            <div 
+              className={`absolute w-96 h-96 rounded-full blur-3xl
+                ${theme === 'dark' 
+                  ? 'opacity-12 bg-gray-400' 
+                  : 'opacity-35 bg-gray-400'
+                }
+              `}
+              style={{
+                top: '10%',
+                left: '10%',
+                animation: 'float 20s ease-in-out infinite, drift 25s ease-in-out infinite alternate'
+              }}
+            />
+            <div 
+              className={`absolute w-80 h-80 rounded-full blur-3xl
+                ${theme === 'dark' 
+                  ? 'opacity-10 bg-gray-500' 
+                  : 'opacity-30 bg-gray-500'
+                }
+              `}
+              style={{
+                top: '60%',
+                right: '20%',
+                animation: 'float 25s ease-in-out infinite reverse, drift 30s ease-in-out infinite'
+              }}
+            />
+            <div 
+              className={`absolute w-72 h-72 rounded-full blur-3xl
+                ${theme === 'dark' 
+                  ? 'opacity-8 bg-gray-600' 
+                  : 'opacity-25 bg-gray-600'
+                }
+              `}
+              style={{
+                bottom: '20%',
+                left: '30%',
+                animation: 'float 18s ease-in-out infinite, drift 22s ease-in-out infinite alternate-reverse'
+              }}
+            />
+          </div>
+
+          {/* Flowing lines animation */}
+          <div className="fixed inset-0 -z-16 overflow-hidden">
+            <svg className={`absolute inset-0 w-full h-full ${theme === 'dark' ? 'opacity-4' : 'opacity-20'}`}>
+              <path
+                d="M0,100 Q150,50 300,100 T600,100"
+                fill="none"
+                stroke={theme === 'dark' ? '#555555' : '#777777'}
+                strokeWidth={theme === 'dark' ? '2' : '3'}
+                className="animate-pulse"
+                style={{ animationDuration: '8s' }}
+              />
+              <path
+                d="M100,200 Q250,150 400,200 T700,200"
+                fill="none"
+                stroke={theme === 'dark' ? '#555555' : '#777777'}
+                strokeWidth={theme === 'dark' ? '1.5' : '2.5'}
+                className="animate-pulse"
+                style={{ animationDuration: '10s', animationDelay: '2s' }}
+              />
+              <path
+                d="M50,300 Q200,250 350,300 T650,300"
+                fill="none"
+                stroke={theme === 'dark' ? '#555555' : '#777777'}
+                strokeWidth={theme === 'dark' ? '1' : '2'}
+                className="animate-pulse"
+                style={{ animationDuration: '12s', animationDelay: '4s' }}
+              />
+            </svg>
+          </div>
+
+          {/* Enhanced gradient overlay with rotation */}
+          <div 
+            className={`fixed inset-0 -z-15 transition-all duration-2000 ease-in-out
+              ${theme === 'dark' ? 'opacity-20' : 'opacity-35'}
+            `}
+            style={{
+              background: theme === 'dark'
+                ? `
+                  conic-gradient(from 0deg at 50% 50%, 
+                    rgba(128, 128, 128, 0.15) 0deg,
+                    rgba(64, 64, 64, 0.08) 90deg,
+                    rgba(105, 105, 105, 0.12) 180deg,
+                    rgba(48, 48, 48, 0.05) 270deg,
+                    rgba(128, 128, 128, 0.15) 360deg
+                  )
+                `
+                : `
+                  conic-gradient(from 0deg at 50% 50%, 
+                    rgba(180, 180, 180, 0.35) 0deg,
+                    rgba(160, 160, 160, 0.25) 90deg,
+                    rgba(200, 200, 200, 0.30) 180deg,
+                    rgba(140, 140, 140, 0.20) 270deg,
+                    rgba(180, 180, 180, 0.35) 360deg
+                  )
+                `,
+              animation: 'spin 60s linear infinite'
+            }}
+          />
+
+          {/* Particle dots animation */}
+          <div className="fixed inset-0 -z-14 overflow-hidden">
+            {Array.from({ length: 15 }, (_, i) => (
+              <div
+                key={i}
+                className={`absolute w-2 h-2 rounded-full animate-bounce
+                  ${theme === 'dark' 
+                    ? 'opacity-20 bg-gray-400' 
+                    : 'opacity-40 bg-gray-600'
+                  }
+                `}
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDuration: `${2 + Math.random() * 3}s`,
+                  animationDelay: `${Math.random() * 2}s`
+                }}
+              />
+            ))}
+          </div>
+
+          {/* 3D Canvas - Desktop only */}
+          <div ref={mountRef} className="fixed inset-0 -z-10" />
+        </>
+      )}
 
       <style jsx>{`
         @keyframes drift {
@@ -458,3 +456,4 @@ export default function Background3D() {
     </>
   )
 }
+
