@@ -70,7 +70,7 @@ export default function Hero() {
   }
 
   if (isMobile) {
-    // --- MOBILE: NO MOTION, ONLY STATIC ELEMENTS ---
+    // --- MOBILE: COMPLETELY STATIC, NO TRANSITIONS OR ANIMATIONS ---
     return (
       <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-28 relative overflow-hidden">
         <div className="max-w-5xl mx-auto text-center relative z-10">
@@ -81,6 +81,7 @@ export default function Hero() {
               Ubed Pathan
             </span>
           </h1>
+          
           <div className="mb-10 h-16 flex items-center justify-center">
             <div className="relative group flex items-center gap-3 justify-center">
               <h2 className={`
@@ -97,7 +98,6 @@ export default function Hero() {
                   `}
                 />
               </h2>
-              
               <div>
                 {React.createElement(roles[currentRole].icon, {
                   size: 24,
@@ -106,19 +106,21 @@ export default function Hero() {
               </div>
             </div>
           </div>
+          
           <p className={`text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed
             ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
           `}>
             Specialized in Java Full-Stack and MERN stack development, crafting robust enterprise solutions 
             and modern web applications. Passionate about building scalable architectures with clean, efficient code.
           </p>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <button
               onClick={() => scrollToSection('projects')}
-              className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 relative overflow-hidden group cursor-pointer
+              className={`px-6 py-3 rounded-full text-base font-semibold relative cursor-pointer
                 ${theme === 'dark'
-                  ? 'bg-white/10 text-white border-2 border-white/20 hover:bg-white/20 hover:border-white/40'
-                  : 'bg-gray-100 text-gray-900 border-2 border-gray-200 hover:bg-gray-200 hover:border-gray-300'
+                  ? 'bg-white/10 text-white border-2 border-white/20'
+                  : 'bg-gray-100 text-gray-900 border-2 border-gray-200'
                 }
               `}
             >
@@ -129,10 +131,10 @@ export default function Hero() {
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 relative overflow-hidden group cursor-pointer
+              className={`px-6 py-3 rounded-full text-base font-semibold relative cursor-pointer
                 ${theme === 'dark'
-                  ? 'bg-gradient-to-r from-gray-700 to-gray-600 text-white hover:from-gray-600 hover:to-gray-500'
-                  : 'bg-gradient-to-r from-gray-900 to-gray-800 text-white hover:from-gray-800 hover:to-gray-700'
+                  ? 'bg-gradient-to-r from-gray-700 to-gray-600 text-white'
+                  : 'bg-gradient-to-r from-gray-900 to-gray-800 text-white'
                 }
               `}
             >
@@ -142,11 +144,12 @@ export default function Hero() {
               </span>
             </button>
           </div>
+          
           <div className="flex justify-center gap-2 mb-8">
             {roles.map((_, index) => (
               <div
                 key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full ${
                   index === currentRole
                     ? `bg-gradient-to-r ${roles[currentRole].underlineColor}`
                     : theme === 'dark' ? 'bg-white/30' : 'bg-gray-400/50'
@@ -154,6 +157,7 @@ export default function Hero() {
               />
             ))}
           </div>
+          
           <div className="flex flex-col items-center">
             <span className={`text-xs uppercase tracking-wider font-medium mb-2
               ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}
@@ -174,39 +178,37 @@ export default function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-28 relative overflow-hidden">
       
-      {/* Remove ALL floating elements on mobile */}
-      {!isMobile && (
-        <div className="absolute inset-0 pointer-events-none">
-          {Array.from({ length: 15 }, (_, i) => (
-            <motion.div
-              key={i}
-              className={`absolute w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-white/30' : 'bg-gray-400/40'}`}
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [-10, 10, -10],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {/* Desktop floating elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 15 }, (_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-white/30' : 'bg-gray-400/40'}`}
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [-10, 10, -10],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
         
-        {/* Main Heading - Mobile optimized */}
+        {/* Desktop animated content */}
         <motion.h1
-          initial={{ y: isMobile ? 10 : 50, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
         >
           <span className="gradient-text">Hello, I'm</span>
@@ -216,14 +218,20 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        {/* Role display - Mobile optimized */}
         <motion.div
-          initial={{ y: isMobile ? 5 : 30, opacity: 0 }}
+          initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="mb-10 h-16 flex items-center justify-center"
         >
-          <div className="relative group">
+          <motion.div
+            key={currentRole}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="relative group"
+          >
             <div className="flex items-center gap-3">
               <h2 className={`
                 text-xl md:text-3xl lg:text-4xl font-bold tracking-tight
@@ -232,32 +240,71 @@ export default function Hero() {
               `}>
                 {roles[currentRole].text}
                 
-                {/* Simple underline - no animations on mobile */}
-                <div
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                   className={`
                     absolute -bottom-1 left-0 right-0 h-0.5
                     bg-gradient-to-r ${roles[currentRole].underlineColor}
                     rounded-full origin-left
                   `}
                 />
+                
+                <motion.div
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                  className={`
+                    absolute -bottom-1 left-0 right-0 h-0.5
+                    bg-gradient-to-r ${roles[currentRole].underlineColor}
+                    rounded-full origin-left blur-sm opacity-50
+                  `}
+                />
               </h2>
               
-              {/* Static icon on mobile */}
-              <div>
+              <motion.div
+                animate={{ 
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+              >
                 {React.createElement(roles[currentRole].icon, {
                   size: 24,
                   className: `${roles[currentRole].textColor} opacity-80`
                 })}
-              </div>
+              </motion.div>
             </div>
-          </div>
+
+            {/* Desktop floating particles */}
+            {Array.from({ length: 3 }, (_, i) => (
+              <motion.div
+                key={i}
+                className={`absolute w-1 h-1 rounded-full ${roles[currentRole].textColor.replace('text-', 'bg-')} opacity-40`}
+                style={{
+                  top: `${10 + i * 15}px`,
+                  left: `${-20 - i * 10}px`,
+                }}
+                animate={{
+                  y: [-5, 5, -5],
+                  opacity: [0.2, 0.6, 0.2],
+                }}
+                transition={{
+                  duration: 2 + i * 0.5,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
+              />
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Description */}
         <motion.p
-          initial={{ y: isMobile ? 10 : 30, opacity: 0 }}
+          initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className={`text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed
             ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
           `}
@@ -266,23 +313,21 @@ export default function Hero() {
           and modern web applications. Passionate about building scalable architectures with clean, efficient code.
         </motion.p>
 
-        {/* Action Buttons - Mobile optimized */}
+        {/* Action Buttons - Desktop optimized */}
         <motion.div
-          initial={{ y: isMobile ? 10 : 30, opacity: 0 }}
+          initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
         >
-          <button
-            {...(!isMobile && {
-              whileHover: { 
-                scale: 1.05, 
-                boxShadow: theme === 'dark' 
-                  ? '0 15px 30px rgba(255, 255, 255, 0.1)' 
-                  : '0 15px 30px rgba(0, 0, 0, 0.15)'
-              },
-              whileTap: { scale: 0.95 }
-            })}
+          <motion.button
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: theme === 'dark' 
+                ? '0 15px 30px rgba(255, 255, 255, 0.1)' 
+                : '0 15px 30px rgba(0, 0, 0, 0.15)'
+            }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('projects')}
             className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 relative overflow-hidden group cursor-pointer
               ${theme === 'dark'
@@ -295,24 +340,19 @@ export default function Hero() {
               <Code size={18} />
               View My Work
             </span>
-            {/* Remove background animation on mobile */}
-            {!isMobile && (
-              <div className={`absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300
-                ${theme === 'dark' ? 'bg-white/5' : 'bg-gray-200/50'}
-              `} />
-            )}
-          </button>
+            <div className={`absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300
+              ${theme === 'dark' ? 'bg-white/5' : 'bg-gray-200/50'}
+            `} />
+          </motion.button>
           
-          <button
-            {...(!isMobile && {
-              whileHover: { 
-                scale: 1.05,
-                boxShadow: theme === 'dark'
-                  ? '0 15px 30px rgba(128, 128, 128, 0.3)'
-                  : '0 15px 30px rgba(75, 85, 99, 0.3)'
-              },
-              whileTap: { scale: 0.95 }
-            })}
+          <motion.button
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: theme === 'dark'
+                ? '0 15px 30px rgba(128, 128, 128, 0.3)'
+                : '0 15px 30px rgba(75, 85, 99, 0.3)'
+            }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('contact')}
             className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 relative overflow-hidden group cursor-pointer
               ${theme === 'dark'
@@ -325,18 +365,24 @@ export default function Hero() {
               <Sparkles size={18} />
               Get In Touch
             </span>
-            {/* Remove sliding animation on mobile */}
-            {!isMobile && (
-              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            )}
-          </button>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+          </motion.button>
         </motion.div>
 
-        {/* Role indicator dots - Static on mobile */}
-        <div className="flex justify-center gap-2 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="flex justify-center gap-2 mb-8"
+        >
           {roles.map((_, index) => (
-            <div
+            <motion.div
               key={index}
+              animate={{
+                scale: index === currentRole ? 1.2 : 1,
+                opacity: index === currentRole ? 1 : 0.4
+              }}
+              transition={{ duration: 0.3 }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentRole
                   ? `bg-gradient-to-r ${roles[currentRole].underlineColor}`
@@ -344,23 +390,41 @@ export default function Hero() {
               }`}
             />
           ))}
-        </div>
+        </motion.div>
 
-        {/* Scroll indicator - Static on mobile */}
-        <div className="flex flex-col items-center">
-          <span className={`text-xs uppercase tracking-wider font-medium mb-2
-            ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}
-          `}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="flex flex-col items-center"
+        >
+          <motion.span 
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className={`text-xs uppercase tracking-wider font-medium mb-2
+              ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}
+            `}
+          >
             Scroll Down
-          </span>
+          </motion.span>
           
-          <div className={!isMobile ? 'animate-bounce' : ''}>
+          <motion.div
+            animate={{ 
+              y: [0, 8, 0],
+              opacity: [0.6, 1, 0.6]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <ChevronDown 
               size={24}
               className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} cursor-pointer`}
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       </div>
     </section>

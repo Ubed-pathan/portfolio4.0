@@ -8,6 +8,7 @@ import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
+import Background3D from './components/Background3D'
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
@@ -24,11 +25,12 @@ export default function Home() {
   }, [])
 
   if (isMobile) {
+    // Mobile: No motion, no background3D, minimal effects
     return (
       <>
         <Header />
         <main 
-          className="relative z-10 pt-20 md:pt-0"
+          className="relative z-10"
           style={{ paddingTop: '100px' }}
         >
           <Hero />
@@ -37,10 +39,12 @@ export default function Home() {
           <Projects />
           <Contact />
         </main>
+        <Background3D />
       </>
     )
   }
 
+  // Desktop: Keep all animations and effects
   return (
     <>
       <Header />
@@ -48,7 +52,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative z-10 pt-20 md:pt-0"
+        className="relative z-10"
         style={{ paddingTop: '100px' }}
       >
         <Hero />
@@ -57,6 +61,7 @@ export default function Home() {
         <Projects />
         <Contact />
       </motion.main>
+      <Background3D />
     </>
   )
 }

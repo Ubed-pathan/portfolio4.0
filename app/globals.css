@@ -52,12 +52,33 @@ header {
     overflow-x: hidden;
   }
   
-  /* Disable all animations and transforms on mobile for performance */
+  /* Completely disable all animations and transforms on mobile for performance */
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    transform: none !important;
+    will-change: auto !important;
+    backface-visibility: visible !important;
+    perspective: none !important;
+    animation-fill-mode: none !important;
+  }
+  
+  /* Disable all CSS animations */
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-ping {
+    animation: none !important;
+  }
+  
+  /* Force static positioning for heavy elements */
+  .blur-3xl,
+  .backdrop-blur-sm,
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+    filter: none !important;
   }
 }
 
