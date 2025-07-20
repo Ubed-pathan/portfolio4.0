@@ -46,24 +46,6 @@ function App() {
               <Contact />
             </div>
           </motion.main>
-
-          {/* Elite footer */}
-          <footer className="relative py-16 glass-card professional-shadow mt-20">
-            <div className="container mx-auto px-6 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <p className="gradient-text-accent text-lg font-medium">
-                  © 2024 John Smith. Crafted with precision & passion.
-                </p>
-                <div className="flex justify-center items-center mt-4 space-x-6">
-                  <span className="text-gray-500 dark:text-gray-400">Built with React & Tailwind CSS</span>
-                </div>
-              </motion.div>
-            </div>
-          </footer>
         </div>
       </div>
     </ThemeProvider>
