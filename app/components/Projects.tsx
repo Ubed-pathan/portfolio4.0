@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useTheme } from './ThemeProvider'
+import { useState, useEffect } from 'react'
 import { ExternalLink, Github, Sparkles, Database, Shield, Zap, Globe, MessageCircle } from 'lucide-react'
 
 export default function Projects() {
@@ -12,6 +13,18 @@ export default function Projects() {
   })
 
   const { theme } = useTheme()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const projects = [
     {
@@ -153,10 +166,10 @@ export default function Projects() {
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: isMobile ? 30 : 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
-                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ duration: isMobile ? 0.4 : 0.6, delay: 0.3 + index * 0.2 }}
+                whileHover={!isMobile ? { y: -10, scale: 1.02 } : {}}
                 className={`glass rounded-3xl overflow-hidden group cursor-pointer relative
                   ${theme === 'dark' 
                     ? 'bg-white/5 border border-white/10 hover:bg-white/10' 
@@ -170,7 +183,9 @@ export default function Projects() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className={`w-full h-full object-cover transition-transform duration-700 ${
+                      !isMobile ? 'group-hover:scale-110' : ''
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-60"></div>
                   
@@ -186,12 +201,12 @@ export default function Projects() {
                     </span>
                   </div>
                   
-                  {/* Action Buttons */}
+                  {/* Action Buttons - Simplified mobile interaction */}
                   <div className="absolute top-4 right-4 flex flex-col space-y-1">
                     <div className="flex space-x-1">
                       <motion.a
                         href={project.github}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={!isMobile ? { scale: 1.1 } : {}}
                         whileTap={{ scale: 0.9 }}
                         className="p-2 glass rounded-full hover:bg-white/20 backdrop-blur-sm flex flex-col items-center"
                       >
@@ -200,7 +215,7 @@ export default function Projects() {
                       {project.demo && (
                         <motion.a
                           href={project.demo}
-                          whileHover={{ scale: 1.1 }}
+                          whileHover={!isMobile ? { scale: 1.1 } : {}}
                           whileTap={{ scale: 0.9 }}
                           className="p-2 glass rounded-full hover:bg-white/20 backdrop-blur-sm flex flex-col items-center"
                         >
@@ -271,31 +286,25 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* View All Projects Button */}
+          {/* View All Projects Button - Simplified mobile hover */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 1.5 }}
+            transition={{ duration: isMobile ? 0.5 : 0.8, delay: 1.5 }}
             className="text-center mt-12"
           >
             <motion.a
               href="https://github.com/Ubed-pathan"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ 
+              whileHover={!isMobile ? { 
                 scale: 1.05,
                 boxShadow: theme === 'dark' 
                   ? '0 20px 40px rgba(255, 255, 255, 0.1)' 
                   : '0 20px 40px rgba(0, 0, 0, 0.15)'
-              }}
+              } : {}}
               whileTap={{ scale: 0.95 }}
-              className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-lg
-                transition-all duration-300 relative overflow-hidden group
-                ${theme === 'dark'
-                  ? 'bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:from-gray-700 hover:to-gray-600 border border-gray-600/50'
-                  : 'bg-gradient-to-r from-gray-900 to-gray-800 text-white hover:from-gray-800 hover:to-gray-700 border border-gray-700/50'
-                }
-              `}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 relative overflow-hidden group"
             >
               <span className="relative z-10 flex items-center gap-3">
                 <Github size={20} />

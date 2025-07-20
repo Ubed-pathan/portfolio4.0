@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useTheme } from './ThemeProvider'
 
@@ -8,9 +8,23 @@ export default function Background3D() {
   const mountRef = useRef<HTMLDivElement>(null)
   const backgroundRef = useRef<HTMLDivElement>(null)
   const { theme } = useTheme()
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    if (!mountRef.current) return
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    // Skip 3D rendering on mobile
+    if (isMobile || !mountRef.current) return
 
     // Scene setup
     const scene = new THREE.Scene()
@@ -181,7 +195,7 @@ export default function Background3D() {
       }
       renderer.dispose()
     }
-  }, [theme])
+  }, [theme, isMobile])
 
   return (
     <>
@@ -414,8 +428,26 @@ export default function Background3D() {
         ))}
       </div>
 
-      {/* 3D Canvas */}
-      <div ref={mountRef} className="fixed inset-0 -z-10" />
+      {/* Simplified mobile background */}
+      {isMobile && (
+        <div className="fixed inset-0 -z-10">
+          <div 
+            className={`absolute inset-0 transition-all duration-1000 ${
+              theme === 'dark' 
+                ? 'bg-gradient-to-br from-gray-900 via-black to-gray-800'
+                : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+            }`}
+          />
+          <div className={`absolute inset-0 opacity-30 ${
+            theme === 'dark' ? 'bg-gray-800/20' : 'bg-gray-200/40'
+          }`}>
+            <div className="w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(128,128,128,0.1)_0%,transparent_50%)]" />
+          </div>
+        </div>
+      )}
+
+      {/* 3D Canvas - Desktop only */}
+      {!isMobile && <div ref={mountRef} className="fixed inset-0 -z-10" />}
 
       <style jsx>{`
         @keyframes drift {

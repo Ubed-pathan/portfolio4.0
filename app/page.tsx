@@ -10,18 +10,23 @@ import Contact from './components/Contact'
 
 export default function Home() {
   return (
-    <motion.main 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="relative z-10"
-    >
+    <>
       <Header />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-    </motion.main>
+      <motion.main 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 pt-20 md:pt-0"
+        style={{
+          paddingTop: '100px' // Ensure content doesn't hide behind fixed header
+        }}
+      >
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </motion.main>
+    </>
   )
 }

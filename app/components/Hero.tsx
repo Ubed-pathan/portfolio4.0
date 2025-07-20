@@ -9,7 +9,19 @@ import { useState, useEffect } from 'react'
 export default function Hero() {
   const { theme } = useTheme()
   const [currentRole, setCurrentRole] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const roles = [
     { 
       text: "Java Full-Stack Developer", 
@@ -57,37 +69,39 @@ export default function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-28 relative overflow-hidden">
       
-      {/* Floating decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 15 }, (_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-white/30' : 'bg-gray-400/40'}`}
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [-10, 10, -10],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [0.5, 1, 0.5],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating decorative elements - Desktop only */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 15 }, (_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-white/30' : 'bg-gray-400/40'}`}
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.2, 0.8, 0.2],
+                scale: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
         
-        {/* Main Heading - Reduced Size */}
+        {/* Main Heading - Reduced animations on mobile */}
         <motion.h1
-          initial={{ y: 50, opacity: 0 }}
+          initial={{ y: isMobile ? 20 : 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: isMobile ? 0.5 : 0.8, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
         >
           <span className="gradient-text">Hello, I'm</span>
@@ -97,27 +111,26 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        {/* Simplified Animated Role Display - Reduced Size */}
+        {/* Simplified role display on mobile */}
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: isMobile ? 15 : 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: isMobile ? 0.5 : 0.8, delay: 0.4 }}
           className="mb-10 h-16 flex items-center justify-center"
         >
           <motion.div
             key={currentRole}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: isMobile ? -10 : -20 }}
             transition={{ 
-              duration: 0.5,
+              duration: isMobile ? 0.3 : 0.5,
               ease: "easeInOut"
             }}
             className="relative group"
           >
-            {/* Role text with reduced typography */}
+            {/* Role text with mobile optimization */}
             <div className="flex items-center gap-3">
-              {/* Main role text - Smaller */}
               <h2 className={`
                 text-xl md:text-3xl lg:text-4xl font-bold tracking-tight
                 ${roles[currentRole].textColor}
@@ -125,12 +138,12 @@ export default function Hero() {
               `}>
                 {roles[currentRole].text}
                 
-                {/* Animated underline */}
+                {/* Simplified underline for mobile */}
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ 
-                    duration: 0.8,
+                    duration: isMobile ? 0.5 : 0.8,
                     delay: 0.2,
                     ease: "easeOut"
                   }}
@@ -141,34 +154,36 @@ export default function Hero() {
                   `}
                 />
                 
-                {/* Glowing underline effect */}
-                <motion.div
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ scaleX: 1, opacity: 1 }}
-                  transition={{ 
-                    duration: 1,
-                    delay: 0.5,
-                    ease: "easeOut"
-                  }}
-                  className={`
-                    absolute -bottom-1 left-0 right-0 h-0.5
-                    bg-gradient-to-r ${roles[currentRole].underlineColor}
-                    rounded-full origin-left blur-sm opacity-50
-                  `}
-                />
+                {/* Desktop glow effect only */}
+                {!isMobile && (
+                  <motion.div
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: 1, opacity: 1 }}
+                    transition={{ 
+                      duration: 1,
+                      delay: 0.5,
+                      ease: "easeOut"
+                    }}
+                    className={`
+                      absolute -bottom-1 left-0 right-0 h-0.5
+                      bg-gradient-to-r ${roles[currentRole].underlineColor}
+                      rounded-full origin-left blur-sm opacity-50
+                    `}
+                  />
+                )}
               </h2>
               
-              {/* Icon with subtle animation - Smaller */}
+              {/* Simplified icon animation for mobile */}
               <motion.div
-                animate={{ 
+                animate={!isMobile ? { 
                   rotate: [0, 10, -10, 0],
                   scale: [1, 1.05, 1]
-                }}
-                transition={{ 
+                } : {}}
+                transition={!isMobile ? { 
                   duration: 3,
                   repeat: Infinity,
                   repeatDelay: 2
-                }}
+                } : {}}
               >
                 {React.createElement(roles[currentRole].icon, {
                   size: 24,
@@ -177,8 +192,8 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* Subtle floating particles */}
-            {Array.from({ length: 3 }, (_, i) => (
+            {/* Desktop floating particles only */}
+            {!isMobile && Array.from({ length: 3 }, (_, i) => (
               <motion.div
                 key={i}
                 className={`absolute w-1 h-1 rounded-full ${roles[currentRole].textColor.replace('text-', 'bg-')} opacity-40`}
@@ -213,21 +228,21 @@ export default function Hero() {
           and modern web applications. Passionate about building scalable architectures with clean, efficient code.
         </motion.p>
 
-        {/* Action Buttons - Smaller */}
+        {/* Action Buttons - Simplified hover effects on mobile */}
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: isMobile ? 15 : 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: isMobile ? 0.5 : 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
         >
           <motion.button
             onClick={() => scrollToSection('projects')}
-            whileHover={{ 
+            whileHover={!isMobile ? { 
               scale: 1.05, 
               boxShadow: theme === 'dark' 
                 ? '0 15px 30px rgba(255, 255, 255, 0.1)' 
                 : '0 15px 30px rgba(0, 0, 0, 0.15)'
-            }}
+            } : {}}
             whileTap={{ scale: 0.95 }}
             className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 relative overflow-hidden group cursor-pointer
               ${theme === 'dark'
@@ -247,12 +262,12 @@ export default function Hero() {
           
           <motion.button
             onClick={() => scrollToSection('contact')}
-            whileHover={{ 
+            whileHover={!isMobile ? { 
               scale: 1.05,
               boxShadow: theme === 'dark'
                 ? '0 15px 30px rgba(128, 128, 128, 0.3)'
                 : '0 15px 30px rgba(75, 85, 99, 0.3)'
-            }}
+            } : {}}
             whileTap={{ scale: 0.95 }}
             className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 relative overflow-hidden group cursor-pointer
               ${theme === 'dark'
