@@ -97,13 +97,13 @@ const About = () => {
                   className="h-1 bg-gradient-to-r from-transparent via-black to-transparent dark:from-transparent dark:via-white dark:to-transparent rounded-full"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: '120px' } : {}}
-                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                 />
                 <motion.div
-                  className="absolute top-0 h-1 bg-gradient-to-r from-black/50 to-transparent dark:from-white/50 dark:to-transparent rounded-full"
+                  className="absolute top-0 h-1 bg-gradient-to-r from-black/30 to-transparent dark:from-white/30 dark:to-transparent rounded-full"
                   initial={{ width: 0 }}
                   animate={isInView ? { width: '60px' } : {}}
-                  transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+                  transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
                 />
               </motion.div>
 
@@ -160,10 +160,10 @@ const About = () => {
                       backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
                     } : {}}
                     transition={{
-                      duration: 4,
+                      duration: 6,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      delay: index * 0.5
+                      delay: index * 1
                     }}
                   >
                     {stat.number}

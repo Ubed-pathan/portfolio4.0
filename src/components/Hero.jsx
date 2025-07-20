@@ -157,7 +157,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              Crafting digital experiences with modern technologies, clean code, and pixel-perfect designs that make an impact.
+              Crafting impactful digital experiences with cutting-edge technologies.
+              Turning ideas into scalable, elegant, and user-focused applications.
             </motion.p>
           </div>
 
@@ -168,21 +169,23 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6, duration: 0.8 }}
           >
-            <motion.button
+            <motion.a
+              href="#projects"
               className="px-8 py-4 bg-black dark:bg-cream text-white dark:text-black font-semibold rounded-2xl professional-shadow hover:scale-105 transition-all duration-300"
               whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}
               whileTap={{ scale: 0.98 }}
             >
               View My Work
-            </motion.button>
+            </motion.a>
             
-            <motion.button
-              className="px-8 py-4 glass-card font-semibold rounded-2xl text-black dark:text-cream hover:scale-105 transition-all duration-300"
+            <motion.a
+              href="#contact"
+              className="px-8 py-4 glass-card font-semibold rounded-2xl text-black dark:text-cream border-2 border-gray-300 dark:border-gray-600 hover:border-black dark:hover:border-cream hover:scale-105 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
               Get In Touch
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Enhanced Scroll Indicator - moved below buttons */}

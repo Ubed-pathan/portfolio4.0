@@ -14,7 +14,7 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
       
       // Fixed active section detection
-      const sections = ['home', 'about', 'projects', 'contact'];
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100; // Navbar offset
       
       // Find the current section by checking which section we're closest to
@@ -62,6 +62,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' }
   ];
@@ -96,13 +97,13 @@ const Navbar = () => {
             >
               <div className="flex flex-col">
                 <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-black to-gray-800 dark:from-cream dark:to-gray-200 bg-clip-text text-transparent tracking-tight">
-                  John Smith
+                  Ubed Pathan
                 </span>
                 <motion.div
                   className="h-0.5 bg-gradient-to-r from-black via-gray-700 to-transparent dark:from-cream dark:via-gray-300 dark:to-transparent rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
-                  transition={{ delay: 1.2, duration: 0.8 }}
+                  transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
                 />
               </div>
             </motion.div>
@@ -149,8 +150,8 @@ const Navbar = () => {
                       scaleY: activeSection === item.href.slice(1) ? 1 : 0
                     }}
                     transition={{ 
-                      duration: 0.3, 
-                      ease: "easeInOut",
+                      duration: 0.2, 
+                      ease: "easeOut",
                     }}
                     style={{ transformOrigin: "center" }}
                   />
@@ -164,7 +165,7 @@ const Navbar = () => {
                         width: "85%",
                         x: "7.5%",
                         transition: { 
-                          duration: 0.3, 
+                          duration: 0.2, 
                           ease: "easeOut"
                         }
                       }}
@@ -185,14 +186,15 @@ const Navbar = () => {
                   {/* Simple Active Section Glow */}
                   {activeSection === item.href.slice(1) && (
                     <motion.div
-                      className="absolute -inset-1 bg-gray-300/30 dark:bg-cream/10 rounded-xl blur-sm"
+                      className="absolute -inset-1 bg-gray-300/20 dark:bg-cream/5 rounded-xl blur-sm"
+                      initial={{ opacity: 0 }}
                       animate={{ 
-                        opacity: [0.3, 0.5, 0.3]
+                        opacity: 0.3
                       }}
+                      exit={{ opacity: 0 }}
                       transition={{ 
-                        duration: 2, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
+                        duration: 0.3,
+                        ease: "easeOut"
                       }}
                     />
                   )}
@@ -446,14 +448,11 @@ const Navbar = () => {
                 initial={false}
                 animate={{
                   width: activeSection === item.href.slice(1) ? "calc(100% - 32px)" : "0%",
-                  // x property can be set to 0 or another value if needed, or removed if not used
                   opacity: activeSection === item.href.slice(1) ? 1 : 0
                 }}
                 transition={{ 
-                  duration: 0.4, 
-                  ease: "easeInOut",
-                  type: "spring",
-                  stiffness: 200
+                  duration: 0.2, 
+                  ease: "easeOut"
                 }}
               />
             </motion.a>
