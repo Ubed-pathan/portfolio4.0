@@ -1,56 +1,66 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          light: '#f8f9fa',
-          dark: '#121212',
-        },
-        secondary: {
-          light: '#e9ecef',
-          dark: '#1e1e1e',
-        },
-        accent: {
-          cream: '#faf7f2',
-          gray: '#6c757d',
-          lightgray: '#adb5bd',
-        }
+        cream: '#F5F5DC',
+        'mesh-purple': 'rgb(120, 119, 198)',
+        'mesh-pink': 'rgb(255, 154, 158)',
+        'mesh-blue': 'rgb(168, 239, 255)',
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'slide-up': 'slideUp 0.8s ease-out',
-        'slide-in': 'slideIn 1s ease-out',
+        'float-slow': 'float-slow 8s ease-in-out infinite',
+        'drift-slow': 'drift-slow 12s ease-in-out infinite',
+        'pulse-gentle': 'pulse-gentle 6s ease-in-out infinite',
+        'wave-slow': 'wave-slow 15s linear infinite',
+        'gradient-shift': 'gradient-shift 20s ease-in-out infinite',
       },
       keyframes: {
-        float: {
+        'float-slow': {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
         },
-        glow: {
-          '0%': { boxShadow: '0 0 20px rgba(255, 255, 255, 0.1)' },
-          '100%': { boxShadow: '0 0 30px rgba(255, 255, 255, 0.3)' },
+        'drift-slow': {
+          '0%': { transform: 'translateX(0px) translateY(0px)' },
+          '25%': { transform: 'translateX(30px) translateY(-20px)' },
+          '50%': { transform: 'translateX(-20px) translateY(-30px)' },
+          '75%': { transform: 'translateX(-30px) translateY(20px)' },
+          '100%': { transform: 'translateX(0px) translateY(0px)' },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(100px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        'pulse-gentle': {
+          '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
+          '50%': { opacity: 0.6, transform: 'scale(1.05)' },
         },
-        slideIn: {
-          '0%': { transform: 'translateX(-100px)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
+        'wave-slow': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100vw)' },
+        },
+        'gradient-shift': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
       },
       backdropBlur: {
         xs: '2px',
       },
+      backgroundImage: {
+        'modern-gradient': 'linear-gradient(135deg, rgba(120, 119, 198, 0.3) 0%, rgba(255, 154, 158, 0.3) 50%, rgba(168, 239, 255, 0.3) 100%)',
+        'dark-gradient': 'linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(14, 165, 233, 0.2) 100%)',
+      },
     },
   },
   plugins: [],
+  // Performance optimizations for mobile
+  corePlugins: {
+    backgroundAttachment: false,
+    backgroundPosition: true,
+    backgroundRepeat: false,
+    backgroundSize: true,
+    fontVariantNumeric: false,
+  },
 }

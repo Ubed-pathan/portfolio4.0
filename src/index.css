@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+    /* Lightweight animated background */
+    background: 
+      linear-gradient(-45deg, 
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(248, 250, 252, 0.95) 25%,
+        rgba(241, 245, 249, 0.9) 50%,
+        rgba(226, 232, 240, 0.95) 75%,
+        rgba(255, 255, 255, 0.9) 100%
+      );
+    background-size: 400% 400%;
+    animation: gradient-shift 20s ease-in-out infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Dark mode with moving gradients */
+  html.dark body {
+    background: 
+      linear-gradient(-45deg, 
+        rgba(15, 23, 42, 0.95) 0%,
+        rgba(30, 41, 59, 0.9) 25%,
+        rgba(51, 65, 85, 0.95) 50%,
+        rgba(30, 41, 59, 0.9) 75%,
+        rgba(15, 23, 42, 0.95) 100%
+      );
+    background-size: 400% 400%;
+    animation: gradient-shift 25s ease-in-out infinite;
+  }
+
+  /* Lightweight floating elements - Desktop only */
+  @media (min-width: 768px) {
+    body::before {
+      content: '';
+      position: fixed;
+      top: 10%;
+      left: -5%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(120, 119, 198, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: drift-slow 15s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+      will-change: transform;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 10%;
+      right: -5%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255, 154, 158, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float-slow 12s ease-in-out infinite reverse;
+      pointer-events: none;
+      z-index: -1;
+      will-change: transform;
+    }
+  }
+
+  /* Mobile-only subtle dots */
+  @media (max-width: 767px) {
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(148, 163, 184, 0.05) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      background-size: 60px 60px, 40px 40px;
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.5;
+    }
+  }
+
+  /* Dark mode mobile dots */
+  html.dark body::before {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(71, 85, 105, 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, rgba(71, 85, 105, 0.1) 1px, transparent 1px);
+    opacity: 0.3;
+  }
+}
+
+@layer utilities {
+  /* Lightweight moving wave effect */
+  .wave-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    animation: wave-slow 8s linear infinite;
+    pointer-events: none;
+  }
+
+  html.dark .wave-bg::before {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(71, 85, 105, 0.1) 50%,
+      transparent 100%
+    );
+  }
+
+  /* Performance optimized animations */
+  .animate-float-light {
+    animation: float-slow 10s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .animate-pulse-gentle {
+    animation: pulse-gentle 8s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+
+  /* GPU acceleration for smooth performance */
+  .gpu-accelerate {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  /* 3D GPU optimizations */
+  .gpu-accelerate-3d {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  /* Enhanced 3D animations for laptops */
+  @media (min-width: 1024px) {
+    .animate-3d-float {
+      animation: float-3d 15s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    .animate-3d-rotate {
+      animation: rotate-3d 20s linear infinite;
+      transform-style: preserve-3d;
+    }
+  }
+
+  @keyframes float-3d {
+    0%, 100% { 
+      transform: translateY(0px) rotateX(0deg) rotateY(0deg); 
+    }
+    25% { 
+      transform: translateY(-30px) rotateX(15deg) rotateY(90deg); 
+    }
+    50% { 
+      transform: translateY(-50px) rotateX(30deg) rotateY(180deg); 
+    }
+    75% { 
+      transform: translateY(-30px) rotateX(15deg) rotateY(270deg); 
+    }
+  }
+
+  @keyframes rotate-3d {
+    0% { 
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); 
+    }
+    33% { 
+      transform: rotateX(120deg) rotateY(120deg) rotateZ(120deg); 
+    }
+    66% { 
+      transform: rotateX(240deg) rotateY(240deg) rotateZ(240deg); 
+    }
+    100% { 
+      transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); 
+    }
+  }
+
+  /* Mobile-first approach */
+  @media (max-width: 768px) {
+    .desktop-only-animate {
+      animation: none !important;
+    }
+    
+    .mobile-reduce-motion {
+      animation-duration: 0.5s !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+/* Performance and accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  body {
+    animation: none !important;
+  }
+
+  body::before,
+  body::after {
+    animation: none !important;
+  }
+}
+
+/* High performance mode for older devices */
+@media (max-width: 480px), (max-height: 600px) {
+  body {
+    animation-duration: 30s !important;
+  }
+
+  body::before,
+  body::after {
+    display: none;
+  }
+}
+
+/* Reduce animations when battery is low */
+@media (prefers-reduced-data: reduce) {
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  body {
+    animation: none;
+    background: 
+      rgb(255, 255, 255);
+  }
+
+  html.dark body {
+    background: rgb(15, 23, 42);
+  }
+}
