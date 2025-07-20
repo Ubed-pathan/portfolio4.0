@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Code, Palette, Zap, Heart, User, Coffee, Award, MapPin } from 'lucide-react';
-import profileImage from '../public/ubed.jpg';
+import profileImage from '../asset/ubed.jpg';
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
