@@ -115,52 +115,59 @@ export default function Projects() {
         </div>
       )}
       <div className="max-w-7xl mx-auto relative z-10" ref={ref}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: isMobile ? 10 : 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: isMobile ? 0.2 : 0.8 }}
+        <div
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={inView ? { scale: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 mb-4"
-          >
-            <Zap size={20} className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} />
-            <span className={`text-sm uppercase tracking-wider font-medium
-              ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
-            `}>
-              Featured Work
-            </span>
-          </motion.div>
-          
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">Projects</h2>
-          
-          <motion.div
-            initial={{ width: 0 }}
-            animate={inView ? { width: 80 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className={`h-1 mx-auto rounded-full bg-gradient-to-r mb-8
-              ${theme === 'dark' ? 'from-gray-400 to-gray-600' : 'from-gray-700 to-gray-900'}
-            `}
-          />
+          {/* Mobile: static, Desktop: animated */}
+          {isMobile ? (
+            <>
+              <div className="inline-flex items-center gap-2 mb-4">
+                <Zap size={20} className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} />
+                <span className={`text-sm uppercase tracking-wider font-medium
+                  ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
+                `}>
+                  Featured Work
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">Projects</h2>
+              <div className={`h-1 mx-auto rounded-full bg-gradient-to-r mb-8
+                ${theme === 'dark' ? 'from-gray-400 to-gray-600' : 'from-gray-700 to-gray-900'}
+              `} style={{ width: 80 }} />
+            </>
+          ) : (
+            <>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={inView ? { scale: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 mb-4"
+              >
+                <Zap size={20} className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} />
+                <span className={`text-sm uppercase tracking-wider font-medium
+                  ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}
+                `}>
+                  Featured Work
+                </span>
+              </motion.div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">Projects</h2>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={inView ? { width: 80 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className={`h-1 mx-auto rounded-full bg-gradient-to-r mb-8
+                  ${theme === 'dark' ? 'from-gray-400 to-gray-600' : 'from-gray-700 to-gray-900'}
+                `}
+              />
+            </>
+          )}
           
           <p className={`text-lg max-w-2xl mx-auto leading-relaxed
             ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
           `}>
             Showcasing my expertise in Java Full-Stack and MERN stack development through real-world applications
           </p>
-        </motion.div>
-
-        {/* Featured Projects */}
-        <motion.div
-          initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.2 }}
-          className="mb-16"
-        >
+        </div>
+        <div className="mb-16">
           <h3 className={`text-2xl font-bold mb-8
             ${theme === 'dark' ? 'text-white' : 'text-gray-900'}
           `}>
@@ -169,12 +176,8 @@ export default function Projects() {
           
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-8">
             {featuredProjects.map((project, index) => (
-              <motion.div
+              <div
                 key={project.title}
-                initial={{ opacity: 0, y: isMobile ? 10 : 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: isMobile ? 0.2 : 0.6, delay: 0.3 + index * (isMobile ? 0.05 : 0.2) }}
-                whileHover={!isMobile ? { y: -10, scale: 1.02 } : {}}
                 className={`glass rounded-3xl overflow-hidden group cursor-pointer relative
                   ${theme === 'dark' 
                     ? 'bg-white/5 border border-white/10 hover:bg-white/10' 
@@ -291,7 +294,7 @@ export default function Projects() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -353,7 +356,7 @@ export default function Projects() {
               Explore more projects on my GitHub profile
             </motion.p>
           </MotionDiv>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
