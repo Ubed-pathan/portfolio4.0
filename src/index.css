@@ -9,97 +9,48 @@
   
   body {
     @apply font-sans antialiased;
-    /* Lightweight animated background */
-    background: 
-      linear-gradient(-45deg, 
-        rgba(255, 255, 255, 0.9) 0%,
-        rgba(248, 250, 252, 0.95) 25%,
-        rgba(241, 245, 249, 0.9) 50%,
-        rgba(226, 232, 240, 0.95) 75%,
-        rgba(255, 255, 255, 0.9) 100%
-      );
-    background-size: 400% 400%;
-    animation: gradient-shift 20s ease-in-out infinite;
+    /* Transparent body - let BackgroundEffects handle everything */
+    background: transparent;
     min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Dark mode with moving gradients */
-  html.dark body {
-    background: 
-      linear-gradient(-45deg, 
-        rgba(15, 23, 42, 0.95) 0%,
-        rgba(30, 41, 59, 0.9) 25%,
-        rgba(51, 65, 85, 0.95) 50%,
-        rgba(30, 41, 59, 0.9) 75%,
-        rgba(15, 23, 42, 0.95) 100%
-      );
-    background-size: 400% 400%;
-    animation: gradient-shift 25s ease-in-out infinite;
-  }
-
-  /* Lightweight floating elements - Desktop only */
-  @media (min-width: 768px) {
-    body::before {
-      content: '';
-      position: fixed;
-      top: 10%;
-      left: -5%;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(120, 119, 198, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: drift-slow 15s ease-in-out infinite;
-      pointer-events: none;
-      z-index: -1;
-      will-change: transform;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      bottom: 10%;
-      right: -5%;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(255, 154, 158, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float-slow 12s ease-in-out infinite reverse;
-      pointer-events: none;
-      z-index: -1;
-      will-change: transform;
-    }
-  }
-
-  /* Mobile-only subtle dots */
-  @media (max-width: 767px) {
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(148, 163, 184, 0.05) 2px, transparent 2px),
-        radial-gradient(circle at 75% 75%, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-      background-size: 60px 60px, 40px 40px;
-      pointer-events: none;
-      z-index: -2;
-      opacity: 0.5;
-    }
-  }
-
-  /* Dark mode mobile dots */
-  html.dark body::before {
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(71, 85, 105, 0.1) 2px, transparent 2px),
-      radial-gradient(circle at 75% 75%, rgba(71, 85, 105, 0.1) 1px, transparent 1px);
-    opacity: 0.3;
   }
 }
 
 @layer utilities {
+  /* Professional glassmorphism effects */
+  .glass-card {
+    @apply bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-white/20 dark:border-cream/20;
+  }
+
+  .glass-navbar {
+    @apply bg-white/80 dark:bg-black/80 backdrop-blur-2xl border-b border-gray-200/50 dark:border-cream/30;
+  }
+
+  .professional-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .dark .professional-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 245, 220, 0.1);
+  }
+
+  /* Elite text gradients */
+  .gradient-text-primary {
+    @apply bg-gradient-to-r from-black via-gray-800 to-black dark:from-cream dark:via-white dark:to-cream bg-clip-text text-transparent;
+  }
+
+  .gradient-text-accent {
+    @apply bg-gradient-to-r from-gray-600 via-black to-gray-600 dark:from-gray-300 dark:via-cream dark:to-gray-300 bg-clip-text text-transparent;
+  }
+
+  /* Ensure proper z-index stacking */
+  .z-background {
+    z-index: -10;
+  }
+
+  .z-content {
+    z-index: 20;
+  }
+
   /* Lightweight moving wave effect */
   .wave-bg {
     position: relative;
@@ -252,11 +203,10 @@
 
   body {
     animation: none;
-    background: 
-      rgb(255, 255, 255);
+    background: #ffffff;
   }
 
   html.dark body {
-    background: rgb(15, 23, 42);
+    background: #000000;
   }
 }

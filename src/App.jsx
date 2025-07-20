@@ -10,39 +10,56 @@ import Contact from './components/Contact';
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen transition-colors duration-300 relative">
-        {/* Fixed background effects behind all content */}
+      <div className="min-h-screen relative">
+        {/* Stunning animated background for desktop, plain for mobile */}
         <BackgroundEffects />
         
-        <Navbar />
-        
-        <motion.main
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10"
-        >
-          <div id="home">
-            <Hero />
-          </div>
-          <div id="about">
-            <About />
-          </div>
-          <div id="projects">
-            <Projects />
-          </div>
-          <div id="contact">
-            <Contact />
-          </div>
-        </motion.main>
+        {/* Premium content layer */}
+        <div className="relative z-10 min-h-screen">
+          <Navbar />
+          
+          <motion.main
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            {/* Professional sections with premium spacing */}
+            <div id="home" className="relative">
+              <Hero />
+            </div>
+            
+            <div id="about" className="relative py-20">
+              <About />
+            </div>
+            
+            <div id="projects" className="relative py-20">
+              <Projects />
+            </div>
+            
+            <div id="contact" className="relative py-20">
+              <Contact />
+            </div>
+          </motion.main>
 
-        <footer className="py-8 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border-t border-gray-200/30 dark:border-gray-700/30 relative z-10">
-          <div className="container mx-auto px-6 text-center">
-            <p className="text-gray-600 dark:text-gray-400">
-              © 2024 John Smith. Built with React & Tailwind CSS.
-            </p>
-          </div>
-        </footer>
+          {/* Elite footer */}
+          <footer className="relative py-16 glass-card professional-shadow mt-20">
+            <div className="container mx-auto px-6 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <p className="gradient-text-accent text-lg font-medium">
+                  © 2024 John Smith. Crafted with precision & passion.
+                </p>
+                <div className="flex justify-center items-center mt-4 space-x-6">
+                  <span className="text-gray-500 dark:text-gray-400">Built with React & Tailwind CSS</span>
+                </div>
+              </motion.div>
+            </div>
+          </footer>
+        </div>
       </div>
     </ThemeProvider>
   );
