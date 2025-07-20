@@ -11,21 +11,21 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark' || 
-             (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    }
-    return false;
-  });
+  const [isDark, setIsDark] = useState(true); // Always start with dark mode
 
   useEffect(() => {
-    const root = window.document.documentElement;
+    // Always force dark mode on every page load/refresh
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    setIsDark(true);
+  }, []); // Empty dependency array means this runs only once on mount
+
+  useEffect(() => {
     if (isDark) {
-      root.classList.add('dark');
+      document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
-      root.classList.remove('dark');
+      document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
   }, [isDark]);
