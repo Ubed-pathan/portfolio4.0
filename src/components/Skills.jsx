@@ -80,11 +80,11 @@ const Skills = () => {
   ];
 
   return (
-    <section className="py-20 relative overflow-hidden" ref={ref}>
+    <section className="py-12 relative overflow-hidden" ref={ref}>
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -129,7 +129,7 @@ const Skills = () => {
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -210,9 +210,9 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Bottom Stats */}
+        {/* Bottom Stats - reduced margin */}
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
