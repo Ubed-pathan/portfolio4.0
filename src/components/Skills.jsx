@@ -141,7 +141,7 @@ const Skills = () => {
               onMouseLeave={() => !isMobile && setHoveredCategory(null)}
             >
               {/* Category Card */}
-              <div className="bg-white/30 dark:bg-black/10 backdrop-blur-3xl border border-gray-200/50 dark:border-cream/20 rounded-3xl p-8 shadow-2xl shadow-gray-300/20 dark:shadow-black/40"
+              <div className="bg-white/20 dark:bg-black/30 backdrop-blur-3xl border border-gray-200/50 dark:border-cream/20 rounded-3xl p-8 shadow-2xl shadow-gray-300/20 dark:shadow-black/60"
                 style={{
                   backdropFilter: 'blur(32px) saturate(180%)',
                   WebkitBackdropFilter: 'blur(32px) saturate(180%)',
@@ -179,7 +179,7 @@ const Skills = () => {
                         delay: categoryIndex * 0.1 + skillIndex * 0.05 
                       }}
                     >
-                      <div className="flex flex-col items-center justify-center p-4 bg-white/40 dark:bg-black/10 rounded-2xl hover:bg-white/60 dark:hover:bg-black/20 hover:shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300 cursor-pointer aspect-square group border border-gray-200/30 dark:border-transparent">
+                      <div className="flex flex-col items-center justify-center p-4 bg-white/30 dark:bg-black/40 rounded-2xl hover:bg-white/50 dark:hover:bg-black/50 hover:shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300 cursor-pointer aspect-square group border border-gray-200/30 dark:border-transparent">
                         <skill.icon 
                           className="text-2xl md:text-3xl mb-2 transition-all duration-300 group-hover:scale-110" 
                           style={{ 

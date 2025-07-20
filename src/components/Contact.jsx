@@ -35,7 +35,7 @@ const Contact = () => {
   ];
 
   return (
-    <section className="py-20 relative overflow-hidden" ref={ref}>
+    <section className="relative overflow-hidden" ref={ref}>
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
@@ -70,7 +70,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/30 dark:bg-black/10 backdrop-blur-3xl border border-gray-200/50 dark:border-cream/20 p-4 sm:p-6 md:p-8 lg:p-12 rounded-3xl professional-shadow"
+          className="bg-white/30 dark:bg-black/40 backdrop-blur-3xl border border-gray-200/50 dark:border-cream/20 p-4 sm:p-6 md:p-8 lg:p-12 rounded-3xl professional-shadow"
           style={{
             backdropFilter: 'blur(32px) saturate(180%)',
             WebkitBackdropFilter: 'blur(32px) saturate(180%)',
@@ -87,7 +87,7 @@ const Contact = () => {
                 </h3>
                 
                 <div className="space-y-3 md:space-y-4 w-full">
-                  <div className="p-3 md:p-4 rounded-xl border w-full bg-white/50 dark:bg-black/20 border-gray-300/30 dark:border-gray-700/50">
+                  <div className="p-3 md:p-4 rounded-xl border w-full bg-white/20 dark:bg-black/30 border-gray-300/30 dark:border-gray-700/50">
                     <h4 className="font-semibold mb-2 text-sm md:text-base text-gray-800 dark:text-white">
                       Freelance Development
                     </h4>
@@ -97,7 +97,7 @@ const Contact = () => {
                     </p>
                   </div>
                   
-                  <div className="p-3 md:p-4 rounded-xl border w-full bg-white/50 dark:bg-black/20 border-gray-300/30 dark:border-gray-700/50">
+                  <div className="p-3 md:p-4 rounded-xl border w-full bg-white/30 dark:bg-black/40 border-gray-300/30 dark:border-gray-700/50">
                     <h4 className="font-semibold mb-2 text-sm md:text-base text-gray-800 dark:text-white">
                       Full-Time Opportunities
                     </h4>

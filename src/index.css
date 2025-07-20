@@ -168,15 +168,28 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
-  /* Enhanced shadows for light mode */
+  /* Enhanced glass card effects with darker backgrounds */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glass-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(245, 245, 220, 0.15);
+  }
+
+  /* Professional shadow with darker cards */
   .professional-shadow {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 
-                0 10px 25px -5px rgba(0, 0, 0, 0.1),
-                0 0 0 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 
+                0 10px 25px -5px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
   }
 
   .dark .professional-shadow {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 
                 0 0 0 1px rgba(245, 245, 220, 0.1);
   }
 

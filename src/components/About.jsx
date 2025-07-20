@@ -52,7 +52,7 @@ const About = () => {
                 transition={{ duration: 0.3 }}
               >
                 {/* Profile Image */}
-                <div className="relative w-80 h-80 mx-auto rounded-3xl overflow-hidden bg-white/20 dark:bg-black/20 backdrop-blur-xl border border-white/30 dark:border-cream/30 professional-shadow">
+                <div className="relative w-80 h-80 mx-auto rounded-3xl overflow-hidden bg-white/30 dark:bg-black/40 backdrop-blur-xl border border-white/30 dark:border-cream/30 professional-shadow">
                   <img 
                     src={profileImage} 
                     alt="Ubed Pathan"
@@ -136,7 +136,7 @@ const About = () => {
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  className="text-center bg-white/10 dark:bg-black/10 backdrop-blur-3xl border border-white/20 dark:border-cream/20 p-6 rounded-2xl professional-shadow"
+                  className="text-center bg-white/20 dark:bg-black/30 backdrop-blur-3xl border border-white/20 dark:border-cream/20 p-6 rounded-2xl professional-shadow"
                   style={{
                     backdropFilter: 'blur(32px) saturate(180%)',
                     WebkitBackdropFilter: 'blur(32px) saturate(180%)',

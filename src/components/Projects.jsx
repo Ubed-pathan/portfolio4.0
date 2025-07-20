@@ -143,7 +143,7 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                className="bg-white/30 dark:bg-black/10 backdrop-blur-3xl border border-gray-200/50 dark:border-cream/20 rounded-3xl overflow-hidden group cursor-pointer relative transition-all duration-500 hover:scale-105 professional-shadow"
+                className="bg-white/20 dark:bg-black/30 backdrop-blur-3xl border border-gray-200/50 dark:border-cream/20 rounded-3xl overflow-hidden group cursor-pointer relative transition-all duration-500 hover:scale-105 professional-shadow"
                 style={{
                   backdropFilter: 'blur(32px) saturate(180%)',
                   WebkitBackdropFilter: 'blur(32px) saturate(180%)',
