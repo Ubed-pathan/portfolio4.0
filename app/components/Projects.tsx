@@ -97,24 +97,32 @@ export default function Projects() {
   const featuredProjects = projects.filter(p => p.featured)
   const otherProjects = projects.filter(p => !p.featured)
 
+  // Mobile optimized components
+  const MotionDiv = isMobile ? 'div' : motion.div
+  const MotionA = isMobile ? 'a' : motion.a
+
   return (
     <section id="projects" className="py-20 px-4 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className={`absolute top-20 left-20 w-40 h-40 rounded-full opacity-5 blur-3xl animate-pulse
-          ${theme === 'dark' ? 'bg-white' : 'bg-gray-900'}
-        `} />
-        <div className={`absolute bottom-40 right-10 w-56 h-56 rounded-full opacity-5 blur-3xl animate-pulse
-          ${theme === 'dark' ? 'bg-gray-400' : 'bg-gray-600'}
-        `} style={{ animationDelay: '2s' }} />
-      </div>
+      {/* Remove background elements on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none">
+          <div className={`absolute top-20 left-20 w-40 h-40 rounded-full opacity-5 blur-3xl animate-pulse
+            ${theme === 'dark' ? 'bg-white' : 'bg-gray-900'}
+          `} />
+          <div className={`absolute bottom-40 right-10 w-56 h-56 rounded-full opacity-5 blur-3xl animate-pulse
+            ${theme === 'dark' ? 'bg-gray-400' : 'bg-gray-600'}
+          `} style={{ animationDelay: '2s' }} />
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto relative z-10" ref={ref}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+        {/* Header - Static on mobile */}
+        <MotionDiv
+          {...(!isMobile && {
+            initial: { opacity: 0, y: 50 },
+            animate: inView ? { opacity: 1, y: 0 } : {},
+            transition: { duration: 0.8 }
+          })}
           className="text-center mb-16"
         >
           <motion.div
@@ -147,13 +155,15 @@ export default function Projects() {
           `}>
             Showcasing my expertise in Java Full-Stack and MERN stack development through real-world applications
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Featured Projects */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
+        <MotionDiv
+          {...(!isMobile && {
+            initial: { opacity: 0, y: 30 },
+            animate: inView ? { opacity: 1, y: 0 } : {},
+            transition: { duration: 0.8, delay: 0.2 }
+          })}
           className="mb-16"
         >
           <h3 className={`text-2xl font-bold mb-8
@@ -164,12 +174,14 @@ export default function Projects() {
           
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-8">
             {featuredProjects.map((project, index) => (
-              <motion.div
+              <MotionDiv
                 key={project.title}
-                initial={{ opacity: 0, y: isMobile ? 30 : 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: isMobile ? 0.4 : 0.6, delay: 0.3 + index * 0.2 }}
-                whileHover={!isMobile ? { y: -10, scale: 1.02 } : {}}
+                {...(!isMobile && {
+                  initial: { opacity: 0, y: 50 },
+                  animate: inView ? { opacity: 1, y: 0 } : {},
+                  transition: { duration: 0.6, delay: 0.3 + index * 0.1 },
+                  whileHover: { y: -10, scale: 1.02 }
+                })}
                 className={`glass rounded-3xl overflow-hidden group cursor-pointer relative
                   ${theme === 'dark' 
                     ? 'bg-white/5 border border-white/10 hover:bg-white/10' 
@@ -201,26 +213,30 @@ export default function Projects() {
                     </span>
                   </div>
                   
-                  {/* Action Buttons - Simplified mobile interaction */}
+                  {/* Action Buttons - Remove hover animations on mobile */}
                   <div className="absolute top-4 right-4 flex flex-col space-y-1">
                     <div className="flex space-x-1">
-                      <motion.a
+                      <MotionA
                         href={project.github}
-                        whileHover={!isMobile ? { scale: 1.1 } : {}}
-                        whileTap={{ scale: 0.9 }}
+                        {...(!isMobile && {
+                          whileHover: { scale: 1.1 },
+                          whileTap: { scale: 0.9 }
+                        })}
                         className="p-2 glass rounded-full hover:bg-white/20 backdrop-blur-sm flex flex-col items-center"
                       >
                         <Github size={16} className="text-white" />
-                      </motion.a>
+                      </MotionA>
                       {project.demo && (
-                        <motion.a
+                        <MotionA
                           href={project.demo}
-                          whileHover={!isMobile ? { scale: 1.1 } : {}}
-                          whileTap={{ scale: 0.9 }}
+                          {...(!isMobile && {
+                            whileHover: { scale: 1.1 },
+                            whileTap: { scale: 0.9 }
+                          })}
                           className="p-2 glass rounded-full hover:bg-white/20 backdrop-blur-sm flex flex-col items-center"
                         >
                           <ExternalLink size={16} className="text-white" />
-                        </motion.a>
+                        </MotionA>
                       )}
                     </div>
                     <div className="flex space-x-1 text-xs text-white font-medium">
@@ -282,28 +298,32 @@ export default function Projects() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
 
-          {/* View All Projects Button - Simplified mobile hover */}
-          <motion.div
-            initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: isMobile ? 0.5 : 0.8, delay: 1.5 }}
+          {/* View All Projects Button - Mobile optimized */}
+          <MotionDiv
+            {...(!isMobile && {
+              initial: { opacity: 0, y: 30 },
+              animate: inView ? { opacity: 1, y: 0 } : {},
+              transition: { duration: 0.8, delay: 1.5 }
+            })}
             className="text-center mt-12"
           >
-            <motion.a
+            <MotionA
               href="https://github.com/Ubed-pathan"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={!isMobile ? { 
-                scale: 1.05,
-                boxShadow: theme === 'dark' 
-                  ? '0 20px 40px rgba(255, 255, 255, 0.1)' 
-                  : '0 20px 40px rgba(0, 0, 0, 0.15)'
-              } : {}}
-              whileTap={{ scale: 0.95 }}
+              {...(!isMobile && {
+                whileHover: { 
+                  scale: 1.05,
+                  boxShadow: theme === 'dark' 
+                    ? '0 20px 40px rgba(255, 255, 255, 0.1)' 
+                    : '0 20px 40px rgba(0, 0, 0, 0.15)'
+                },
+                whileTap: { scale: 0.95 }
+              })}
               className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 relative overflow-hidden group"
             >
               <span className="relative z-10 flex items-center gap-3">
@@ -312,19 +332,22 @@ export default function Projects() {
                 <ExternalLink size={16} />
               </span>
               
-              {/* Animated background effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent 
-                transform -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              
-              {/* Subtle glow effect */}
-              <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 
-                transition-opacity duration-500 blur-xl
-                ${theme === 'dark' 
-                  ? 'bg-gradient-to-r from-gray-600/30 to-gray-700/30' 
-                  : 'bg-gradient-to-r from-gray-800/30 to-gray-900/30'
-                }
-              `} />
-            </motion.a>
+              {/* Remove animated effects on mobile */}
+              {!isMobile && (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent 
+                    transform -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  
+                  <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 
+                    transition-opacity duration-500 blur-xl
+                    ${theme === 'dark' 
+                      ? 'bg-gradient-to-r from-gray-600/30 to-gray-700/30' 
+                      : 'bg-gradient-to-r from-gray-800/30 to-gray-900/30'
+                    }
+                  `} />
+                </>
+              )}
+            </MotionA>
             
             <motion.p
               initial={{ opacity: 0 }}
@@ -336,8 +359,8 @@ export default function Projects() {
             >
               Explore more projects on my GitHub profile
             </motion.p>
-          </motion.div>
-        </motion.div>
+          </MotionDiv>
+        </MotionDiv>
       </div>
     </section>
   )
