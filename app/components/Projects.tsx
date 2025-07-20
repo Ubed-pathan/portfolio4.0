@@ -103,7 +103,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-20 px-4 relative overflow-hidden">
-      {/* Remove background elements on mobile */}
+      {/* Background Elements */}
       {!isMobile && (
         <div className="absolute inset-0 pointer-events-none">
           <div className={`absolute top-20 left-20 w-40 h-40 rounded-full opacity-5 blur-3xl animate-pulse
@@ -114,15 +114,12 @@ export default function Projects() {
           `} style={{ animationDelay: '2s' }} />
         </div>
       )}
-
       <div className="max-w-7xl mx-auto relative z-10" ref={ref}>
-        {/* Header - Static on mobile */}
-        <MotionDiv
-          {...(!isMobile && {
-            initial: { opacity: 0, y: 50 },
-            animate: inView ? { opacity: 1, y: 0 } : {},
-            transition: { duration: 0.8 }
-          })}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: isMobile ? 10 : 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: isMobile ? 0.2 : 0.8 }}
           className="text-center mb-16"
         >
           <motion.div
@@ -155,15 +152,13 @@ export default function Projects() {
           `}>
             Showcasing my expertise in Java Full-Stack and MERN stack development through real-world applications
           </p>
-        </MotionDiv>
+        </motion.div>
 
         {/* Featured Projects */}
-        <MotionDiv
-          {...(!isMobile && {
-            initial: { opacity: 0, y: 30 },
-            animate: inView ? { opacity: 1, y: 0 } : {},
-            transition: { duration: 0.8, delay: 0.2 }
-          })}
+        <motion.div
+          initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.2 }}
           className="mb-16"
         >
           <h3 className={`text-2xl font-bold mb-8
@@ -174,14 +169,12 @@ export default function Projects() {
           
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-8">
             {featuredProjects.map((project, index) => (
-              <MotionDiv
+              <motion.div
                 key={project.title}
-                {...(!isMobile && {
-                  initial: { opacity: 0, y: 50 },
-                  animate: inView ? { opacity: 1, y: 0 } : {},
-                  transition: { duration: 0.6, delay: 0.3 + index * 0.1 },
-                  whileHover: { y: -10, scale: 1.02 }
-                })}
+                initial={{ opacity: 0, y: isMobile ? 10 : 50 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: isMobile ? 0.2 : 0.6, delay: 0.3 + index * (isMobile ? 0.05 : 0.2) }}
+                whileHover={!isMobile ? { y: -10, scale: 1.02 } : {}}
                 className={`glass rounded-3xl overflow-hidden group cursor-pointer relative
                   ${theme === 'dark' 
                     ? 'bg-white/5 border border-white/10 hover:bg-white/10' 
@@ -298,7 +291,7 @@ export default function Projects() {
                     ))}
                   </div>
                 </div>
-              </MotionDiv>
+              </motion.div>
             ))}
           </div>
 
@@ -360,7 +353,7 @@ export default function Projects() {
               Explore more projects on my GitHub profile
             </motion.p>
           </MotionDiv>
-        </MotionDiv>
+        </motion.div>
       </div>
     </section>
   )

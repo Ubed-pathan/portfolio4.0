@@ -199,7 +199,6 @@ export default function Background3D() {
 
   return (
     <>
-      {/* Simple static background for mobile - NO animations */}
       {isMobile ? (
         <div className="fixed inset-0 -z-10">
           <div 
@@ -331,7 +330,7 @@ export default function Background3D() {
               style={{
                 top: '10%',
                 left: '10%',
-                animation: 'float 20s ease-in-out infinite, drift 25s ease-in-out infinite alternate'
+                animation: 'float 20s ease-in-out infinite, drift 25s ease-in-out infinite'
               }}
             />
             <div 

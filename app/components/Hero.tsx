@@ -104,12 +104,10 @@ export default function Hero() {
       <div className="max-w-5xl mx-auto text-center relative z-10">
         
         {/* Main Heading - Mobile optimized */}
-        <MotionH1
-          {...(!isMobile && {
-            initial: { y: 50, opacity: 0 },
-            animate: { y: 0, opacity: 1 },
-            transition: { duration: 0.8, delay: 0.2 }
-          })}
+        <motion.h1
+          initial={{ y: isMobile ? 10 : 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
         >
           <span className="gradient-text">Hello, I'm</span>
@@ -117,15 +115,13 @@ export default function Hero() {
           <span className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'} block mt-2`}>
             Ubed Pathan
           </span>
-        </MotionH1>
+        </motion.h1>
 
         {/* Role display - Mobile optimized */}
-        <MotionDiv
-          {...(!isMobile && {
-            initial: { y: 30, opacity: 0 },
-            animate: { y: 0, opacity: 1 },
-            transition: { duration: 0.8, delay: 0.4 }
-          })}
+        <motion.div
+          initial={{ y: isMobile ? 5 : 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.4 }}
           className="mb-10 h-16 flex items-center justify-center"
         >
           <div className="relative group">
@@ -157,30 +153,26 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </MotionDiv>
+        </motion.div>
 
         {/* Description */}
-        <MotionP
-          {...(!isMobile && {
-            initial: { y: 30, opacity: 0 },
-            animate: { y: 0, opacity: 1 },
-            transition: { duration: 0.8, delay: 0.6 }
-          })}
+        <motion.p
+          initial={{ y: isMobile ? 10 : 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.6 }}
           className={`text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed
             ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}
           `}
         >
           Specialized in Java Full-Stack and MERN stack development, crafting robust enterprise solutions 
           and modern web applications. Passionate about building scalable architectures with clean, efficient code.
-        </MotionP>
+        </motion.p>
 
         {/* Action Buttons - Mobile optimized */}
-        <MotionDiv
-          {...(!isMobile && {
-            initial: { y: 30, opacity: 0 },
-            animate: { y: 0, opacity: 1 },
-            transition: { duration: 0.8, delay: 0.8 }
-          })}
+        <motion.div
+          initial={{ y: isMobile ? 10 : 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: isMobile ? 0.2 : 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
         >
           <MotionButton
@@ -240,7 +232,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             )}
           </MotionButton>
-        </MotionDiv>
+        </motion.div>
 
         {/* Role indicator dots - Static on mobile */}
         <MotionDiv
